@@ -5,8 +5,8 @@ require 'png_gradient'
 ###   MAIN PAGES   ###
 
 get '/' do
-  @color1 = "00FF00"
-  @color2 = "FF00FF"
+  @color1 = "afdeda"
+  @color2 = "949494"
   haml :index
 end
 

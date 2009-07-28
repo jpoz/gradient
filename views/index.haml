@@ -1,28 +1,43 @@
-%h1 Gradient
+%h1 Gradient generator
 
-Height
-%input{:id => 'height', :type => 'text', :value => '100'}
+%table.gen_table
+  %tr
+    %td
+      Height
+      %input{:id => 'height', :type => 'text', :value => '400'}
+    %td
+      Width
+      %input{:id => 'width', :type => 'text', :value => '40'}
+    %td{:rowspan=>2}
+      #preview{:style => "text-align: center"}
+  %tr
+    %td
+      Color1:
+      #color1{:style => "width: 25px; height: 25px;"}
+        %input{:type => 'hidden', :value => @color1}
+        %div{:style => "width: 100%; height: 100%; background-color: ##{@color1};"}
+    %td
+      Color2:
+      #color2{:style => "width: 25px; height: 25px;"}
+        %input{:type => 'hidden', :value => @color2}
+        %div{:style => "width: 100%; height: 100%; background-color: ##{@color2}"}
 
-Width
-%input{:id => 'width', :type => 'text', :value => '100'}
-
-%br
-Color1:
-#color1{:style => "width: 25px; height: 25px;"}
-  %input{:type => 'hidden', :value => @color1}
-  %div{:style => "width: 100%; height: 100%; background-color: ##{@color1};"}
-
-Color2:
-#color2{:style => "width: 25px; height: 25px;"}
-  %input{:type => 'hidden', :value => @color2}
-  %div{:style => "width: 100%; height: 100%; background-color: ##{@color2}"}
 %br
 %br
 %input{:type => 'submit', :id => 'go', :value => 'GO!'}
 
-
+#api_info
+  %h2
+    API:
+  %h3
+    http://gradient.jpoz.net/:height/:width/:color1/:color2/output.png
+  %h4
+    %p
+      Example:
+    %p
+      %a{:href => 'http://gradient.jpoz.net/400/10/FF0000/112233/output.png'}
+        http://gradient.jpoz.net/400/10/FF0000/112233/output.png
     
-#preview
 
 
 :javascript
@@ -31,10 +46,11 @@ Color2:
     var width = $('#width').attr('value');
     var color2 = $('#color1 input').attr('value');
     var color1 = $('#color2 input').attr('value');
-    var location = '/' + height + '/' + width + '/' + color1 + '/' + color2 + '/output.html'
+    var location = '/' + height + '/' + width + '/' + color1 + '/' + color2 + '/output.'
 
-    $.get(location, function(data, textStatus){
+    $.get(location + "html", function(data, textStatus){
       $('#preview').html(data);
+      $('body').css('background', "url('" + location + "png') #" + color1 + " repeat-x");
     });
     
     
