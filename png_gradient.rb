@@ -22,13 +22,13 @@ class PNGGradient
   def canvas
     return @canvas if @canvas
     @canvas = PNG::Canvas.new(@w, @h)
-    (@h-1).times do |i|
-      d = i.to_f/(@h-1)
+    (@h).times do |i|
+      d = i.to_f/(@h)
       r, g, b = (@ca1[0]*d + @ca2[0]*(1-d)), 
                 (@ca1[1]*d + @ca2[1]*(1-d)), 
                 (@ca1[2]*d + @ca2[2]*(1-d))
       c = PNG::Color.new(r,g,b)
-      (@w-1).times do |j|
+      (@w).times do |j|
         @canvas[(@w-1)-j, (@h-1)-i]=c
       end
     end
