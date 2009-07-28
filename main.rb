@@ -10,15 +10,18 @@ get '/' do
   haml :index
 end
 
-get %r{/(\d*)/(\d*)/(\w*)/(\w*)/output.png} do |height, width, color1, color2|
-  headers 'Content-Type' => 'image/png'
-  png_gradient = PNGGradient.new(width.to_i, height.to_i, "##{color1}", "##{color2}")
-  png_gradient.to_blob()
-end
-
-get %r{/(\d*)/(\d*)/(\w*)/(\w*)/output.html} do |height, width, color1, color2|
-  @height, @width, @color1, @color2 = height, width, color1, color2
-  haml :png, :layout => false
+get %r{^/(\d{1,3})/(\d{1,3})/([0-9A-Fa-f]{6,6})/([0-9A-Fa-f]{6,6})/output.(\w+)$} do |height, width, color1, color2, type|
+  case type
+  when "png"
+    headers 'Content-Type' => 'image/png'
+    png_gradient = PNGGradient.new(width.to_i, height.to_i, "##{color1}", "##{color2}")
+    png_gradient.to_blob()
+  when "html"
+    @height, @width, @color1, @color2 = height, width, color1, color2
+    haml :png, :layout => false
+  else
+    haml :'404'
+  end
 end
 
 ### STATIC / ERROR ###
