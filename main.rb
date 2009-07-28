@@ -1,10 +1,13 @@
 require 'rubygems'
 require 'sinatra'
+require 'png_gradient'
 
 ###   MAIN PAGES   ###
 
-get '/' do
-  "HELLO!!!"
+get '/:width/:height/:color1/:color2/output.png' do
+  header 'Content-Type' => 'image/png'
+  png_gradient = PNGGradient.new(params[:width].to_i, params[:height].to_i, "##{params[:color1]}", "##{params[:color2]}")
+  png_gradient.to_blob()
 end
 
 ### STATIC / ERROR ###
