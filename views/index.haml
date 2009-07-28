@@ -1,0 +1,67 @@
+%h1 Gradient
+
+Height
+%input{:id => 'height', :type => 'text', :value => '100'}
+
+Width
+%input{:id => 'width', :type => 'text', :value => '100'}
+
+%br
+Color1:
+#color1{:style => "width: 25px; height: 25px;"}
+  %input{:type => 'hidden', :value => @color1}
+  %div{:style => "width: 100%; height: 100%; background-color: ##{@color1};"}
+
+Color2:
+#color2{:style => "width: 25px; height: 25px;"}
+  %input{:type => 'hidden', :value => @color2}
+  %div{:style => "width: 100%; height: 100%; background-color: ##{@color2}"}
+%br
+%br
+#go
+  GO!
+    
+#preview
+
+
+:javascript
+  $('#go').click(function () {
+    var height = $('#height').attr('value');
+    var width = $('#width').attr('value');
+    var color2 = $('#color1 input').attr('value');
+    var color1 = $('#color2 input').attr('value');
+    window.location = '/' + height + '/' + width + '/' + color1 + '/' + color2 + '/output.html'
+  });
+
+  $('#color1').ColorPicker({
+    color: '#0000ff',
+    onShow: function (colpkr) {
+      $(colpkr).fadeIn(500);
+      return false;
+    },
+    onHide: function (colpkr) {
+      $(colpkr).fadeOut(500);
+      return false;
+    },
+    onChange: function (hsb, hex, rgb) {
+      $('#color1 div').css('backgroundColor', '#' + hex);
+      $('#color1 input').attr('value',hex);
+    }
+  });
+  
+  
+  $('#color2').ColorPicker({
+    color: '#0000ff',
+    onShow: function (colpkr) {
+      $(colpkr).fadeIn(500);
+      return false;
+    },
+    onHide: function (colpkr) {
+      $(colpkr).fadeOut(500);
+      return false;
+    },
+    onChange: function (hsb, hex, rgb) {
+      $('#color2 div').css('backgroundColor', '#' + hex);
+      $('#color2 input').attr('value',hex);
+    }
+  });

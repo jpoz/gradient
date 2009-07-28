@@ -4,10 +4,21 @@ require 'png_gradient'
 
 ###   MAIN PAGES   ###
 
-get '/:width/:height/:color1/:color2/output.png' do
-  header 'Content-Type' => 'image/png'
-  png_gradient = PNGGradient.new(params[:width].to_i, params[:height].to_i, "##{params[:color1]}", "##{params[:color2]}")
+get '/' do
+  @color1 = "00FF00"
+  @color2 = "FF00FF"
+  haml :index
+end
+
+get %r{/(\d*)/(\d*)/(\w*)/(\w*)/output.png} do |height, width, color1, color2|
+  headers 'Content-Type' => 'image/png'
+  png_gradient = PNGGradient.new(width.to_i, height.to_i, "##{color1}", "##{color2}")
   png_gradient.to_blob()
+end
+
+get %r{/(\d*)/(\d*)/(\w*)/(\w*)/output.html} do |height, width, color1, color2|
+  @height, @width, @color1, @color2 = height, width, color1, color2
+  haml :png, :layout => false
 end
 
 ### STATIC / ERROR ###
@@ -23,5 +34,5 @@ not_found do
 end
 
 error do
-  'Sorry there was a nasty error - ' + env['sinatra.error']
+  'AHHHHHHHHH - ' + env['sinatra.error']
 end

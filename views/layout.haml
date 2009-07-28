@@ -1,0 +1,15 @@
+!!!
+%html{ :xmlns => "http://www.w3.org/1999/xhtml", :"xml:lang" =>"en", :lang =>"en" }
+  %head
+    %title
+      Gradient
+    %link{ :type => "text/css", :rel => "stylesheet", :media => "screen", :href => "/stylesheet.css" }
+    %link{ :type => "text/css", :rel => "stylesheet", :media => "screen", :href => "/css/colorpicker.css" }
+    %script{:type => "text/javascript", :src  => "/js/jquery.js"}
+    %script{:type => "text/javascript", :src  => "/js/colorpicker.js"}
+  %body
+    #content
+      %span#title
+        Gradient
+      #main
+        = yield
