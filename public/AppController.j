@@ -78,4 +78,23 @@
   
 }
 
+- (void)downloadGradient:(id)sender
+{
+  if ([widthText objectValue]) {
+    var width = Math.round([widthText objectValue]);
+  } else {
+    var width = Math.round([widthSlider objectValue]);
+  }
+  
+  if ([heightText objectValue]) {
+    var height = Math.round([heightText objectValue]);
+  } else {
+    var height = Math.round([heightSlider objectValue]);
+  }
+  
+  var gradientURL = "http://gradient.jpoz.net/" + height + "/" + width + "/" + bHexValue + "/" + tHexValue + "/output.html"
+  
+  window.location = gradientURL;
+}
+
 @end
