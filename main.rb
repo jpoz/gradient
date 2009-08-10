@@ -5,9 +5,7 @@ require 'png_gradient'
 ###   MAIN PAGES   ###
 
 get '/' do
-  @color1 = "afdeda"
-  @color2 = "949494"
-  haml :index
+  haml :index_capp, :layout => false
 end
 
 get %r{^/(\d{1,3})/(\d{1,3})/([0-9A-Fa-f]{6,6})/([0-9A-Fa-f]{6,6})/output.(\w+)$} do |height, width, color1, color2, type|
