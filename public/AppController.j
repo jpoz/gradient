@@ -80,6 +80,7 @@
 
 - (void)downloadGradient:(id)sender
 {
+  alert("This doesn't work yet... Sorry. Right-click on a preview to download.");
   if ([widthText objectValue]) {
     var width = Math.round([widthText objectValue]);
   } else {
@@ -92,9 +93,9 @@
     var height = Math.round([heightSlider objectValue]);
   }
   
-  var gradientURL = "http://gradient.jpoz.net/" + height + "/" + width + "/" + bHexValue + "/" + tHexValue + "/output.html"
+  var gradientURL = "http://gradient.jpoz.net/" + height + "/" + width + "/" + bHexValue + "/" + tHexValue + "/output.html";
   
-  window.location = gradientURL;
+  window.location.href = gradientURL;
 }
 
 @end
